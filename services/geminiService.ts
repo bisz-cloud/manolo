@@ -1,16 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
 
-const getClient = () => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    throw new Error("API Key is missing.");
-  }
-  return new GoogleGenAI({ apiKey });
-};
-
 export const generatePhotoTip = async (topic: string): Promise<string> => {
   try {
-    const ai = getClient();
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const prompt = `
       Write a short, professional, and creative photography tip or idea related to: "${topic}".
       Target audience: Families or individuals looking for professional photography in Israel.
